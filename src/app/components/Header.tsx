@@ -9,13 +9,13 @@ export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-[68px]">
+        <div className="flex items-center justify-between h-[80px]">
           {/* Logo */}
-          <div className="flex items-center flex-shrink-0">
+          <div className="flex items-center flex-shrink-0 leading-none">
             <img
               src={logoAEB}
               alt="Agência Espacial Brasileira"
-              className="h-12"
+              className="w-32"
             />
           </div>
 

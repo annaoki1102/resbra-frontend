@@ -51,16 +51,101 @@ export default function App() {
       <Header />
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="relative min-h-[60vh] md:min-h-[64vh] flex items-center justify-center overflow-hidden bg-white">
+        <section className="relative min-h-[60vh] md:min-h-[64vh] flex items-center justify-center overflow-hidden bg-[#fcfdff]">
           <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-            <img
-              // Temporary subtle Earth background. Replace with official AEB/NASA/ESA asset when available.
-              src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1600"
-              alt="Terra vista do espaço"
-              className="w-full h-full object-cover object-[72%_center] opacity-[0.75]"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-white/0 via-white/8 to-white/18"></div>
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.30)_0%,rgba(255,255,255,0.24)_36%,rgba(255,255,255,0.14)_62%,rgba(255,255,255,0.02)_84%,rgba(255,255,255,0)_100%)]"></div>
+            {/* Previous background image kept for quick rollback:
+                https://images.unsplash.com/photo-1451187580459-43490279c0fa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1600
+            */}
+            <div className="absolute inset-0 bg-[radial-gradient(125%_92%_at_50%_40%,rgba(255,255,255,0.98)_0%,rgba(252,253,255,0.98)_48%,rgba(247,250,254,0.98)_100%)]" />
+
+            <svg
+              viewBox="0 0 1600 900"
+              className="absolute inset-0 h-full w-full opacity-90"
+              preserveAspectRatio="xMidYMid slice"
+            >
+              <defs>
+                <pattern id="geoGrid" width="56" height="56" patternUnits="userSpaceOnUse">
+                  <path d="M 56 0 L 0 0 0 56" fill="none" stroke="rgba(23,74,136,0.09)" strokeWidth="1" />
+                </pattern>
+                <linearGradient id="earthFill" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="rgba(18,60,112,0.60)" />
+                  <stop offset="55%" stopColor="rgba(25,88,156,0.50)" />
+                  <stop offset="100%" stopColor="rgba(47,124,188,0.40)" />
+                </linearGradient>
+                <radialGradient id="earthAtmo" cx="50%" cy="50%" r="62%">
+                  <stop offset="0%" stopColor="rgba(130,187,233,0.38)" />
+                  <stop offset="68%" stopColor="rgba(130,187,233,0.20)" />
+                  <stop offset="100%" stopColor="rgba(130,187,233,0)" />
+                </radialGradient>
+              </defs>
+
+              {/* Very light geospatial grid */}
+              <rect x="0" y="0" width="1600" height="900" fill="url(#geoGrid)" opacity="0.48" />
+
+              {/* Partial Earth for stronger spatial identity */}
+              <g transform="translate(1540 910)">
+                <circle cx="0" cy="0" r="400" fill="url(#earthAtmo)" />
+                <circle cx="0" cy="0" r="300" fill="url(#earthFill)" />
+                <path
+                  d="M-235 -36 C-168 -82 -92 -86 -28 -56 C34 -26 88 26 134 92"
+                  stroke="rgba(183,220,246,0.34)"
+                  strokeWidth="1.4"
+                  fill="none"
+                />
+                <path
+                  d="M-210 74 C-132 20 -30 -10 88 6 C150 14 216 42 264 88"
+                  stroke="rgba(183,220,246,0.28)"
+                  strokeWidth="1.2"
+                  fill="none"
+                />
+              </g>
+
+              {/* Subtle orbital curves, concentrated outside center */}
+              <path
+                d="M -90 640 C 230 454, 438 456, 660 620"
+                fill="none"
+                stroke="rgba(20,70,130,0.34)"
+                strokeWidth="1.7"
+              />
+              <path
+                d="M -110 694 C 216 526, 430 536, 620 700"
+                fill="none"
+                stroke="rgba(20,70,130,0.26)"
+                strokeWidth="1.3"
+              />
+              <path
+                d="M 920 648 C 1102 498, 1332 486, 1720 636"
+                fill="none"
+                stroke="rgba(20,70,130,0.34)"
+                strokeWidth="1.7"
+              />
+              <path
+                d="M 980 726 C 1188 580, 1400 578, 1720 714"
+                fill="none"
+                stroke="rgba(20,70,130,0.26)"
+                strokeWidth="1.3"
+              />
+
+              {/* Monitoring points and technical links */}
+              <g fill="rgba(43,112,172,0.56)">
+                <circle cx="214" cy="624" r="3" />
+                <circle cx="308" cy="574" r="2.7" />
+                <circle cx="514" cy="646" r="2.7" />
+                <circle cx="1120" cy="654" r="2.7" />
+                <circle cx="1264" cy="592" r="3" />
+                <circle cx="1426" cy="662" r="2.7" />
+              </g>
+              <g stroke="rgba(110,170,215,0.42)" strokeWidth="1.2">
+                <line x1="214" y1="624" x2="308" y2="574" />
+                <line x1="308" y1="574" x2="514" y2="646" />
+                <line x1="1120" y1="654" x2="1264" y2="592" />
+                <line x1="1264" y1="592" x2="1426" y2="662" />
+              </g>
+            </svg>
+
+            {/* Keep center clean for title readability */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_39%,rgba(255,255,255,0.98)_0%,rgba(255,255,255,0.95)_34%,rgba(255,255,255,0.74)_54%,rgba(255,255,255,0.24)_74%,rgba(255,255,255,0)_100%)]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-white/14 via-transparent to-[#f8fbff]/56" />
           </div>
 
           <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 py-10 md:py-12 text-center">
