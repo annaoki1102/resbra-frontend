@@ -150,7 +150,7 @@ export default function App() {
 
           <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 py-10 md:py-12 text-center">
             <div className="space-y-4 md:space-y-5">
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-light text-gray-900 leading-[1.1] tracking-tight max-w-5xl mx-auto">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-light text-gray-900 leading-[1.05] tracking-tight max-w-5xl mx-auto">
                 Registro e governança das atividades espaciais brasileiras
               </h1>
 
@@ -182,7 +182,7 @@ export default function App() {
                 </h2>
 
                 <div className="space-y-6 text-gray-600 leading-relaxed text-justify">
-                  <p className="text-lg">
+                  <p>
                     O RESBRA é a infraestrutura nacional para registro, monitoramento e licenciamento
                     de operações espaciais brasileiras, desenvolvido pela Agência Espacial Brasileira
                     em conformidade com tratados internacionais e marcos regulatórios nacionais.
@@ -321,7 +321,7 @@ export default function App() {
           <div className="max-w-7xl mx-auto px-6 lg:px-12">
             <div className="text-center max-w-3xl mx-auto mb-16">
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 leading-tight tracking-tight mb-6">
-                Ecossistema espacial brasileiro
+                SINDAE
               </h2>
               <p className="text-lg text-gray-600 leading-relaxed text-justify">
                 Integração com agências governamentais, instituições de pesquisa e operadores do setor espacial brasileiro

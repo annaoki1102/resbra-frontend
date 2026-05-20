@@ -4,7 +4,6 @@ import logoAEB from '../../imports/logoaeb_1.png';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200">
@@ -24,8 +23,6 @@ export function Header() {
             <div className="relative group">
               <button
                 className="flex items-center gap-1.5 px-4 py-2 text-sm text-gray-700 hover:text-gray-900 transition-colors"
-                onMouseEnter={() => setActiveDropdown('sobre')}
-                onMouseLeave={() => setActiveDropdown(null)}
               >
                 Sobre o RESBRA
                 <ChevronDown className="w-4 h-4" />
@@ -35,8 +32,6 @@ export function Header() {
             <div className="relative group">
               <button
                 className="flex items-center gap-1.5 px-4 py-2 text-sm text-gray-700 hover:text-gray-900 transition-colors"
-                onMouseEnter={() => setActiveDropdown('registro')}
-                onMouseLeave={() => setActiveDropdown(null)}
               >
                 Registro Espacial
                 <ChevronDown className="w-4 h-4" />
@@ -46,8 +41,6 @@ export function Header() {
             <div className="relative group">
               <button
                 className="flex items-center gap-1.5 px-4 py-2 text-sm text-gray-700 hover:text-gray-900 transition-colors"
-                onMouseEnter={() => setActiveDropdown('servicos')}
-                onMouseLeave={() => setActiveDropdown(null)}
               >
                 Serviços
                 <ChevronDown className="w-4 h-4" />
@@ -57,24 +50,12 @@ export function Header() {
             <div className="relative group">
               <button
                 className="flex items-center gap-1.5 px-4 py-2 text-sm text-gray-700 hover:text-gray-900 transition-colors"
-                onMouseEnter={() => setActiveDropdown('dados')}
-                onMouseLeave={() => setActiveDropdown(null)}
               >
                 Dados e Estatísticas
                 <ChevronDown className="w-4 h-4" />
               </button>
             </div>
 
-            <div className="relative group">
-              <button
-                className="flex items-center gap-1.5 px-4 py-2 text-sm text-gray-700 hover:text-gray-900 transition-colors"
-                onMouseEnter={() => setActiveDropdown('imprensa')}
-                onMouseLeave={() => setActiveDropdown(null)}
-              >
-                Imprensa
-                <ChevronDown className="w-4 h-4" />
-              </button>
-            </div>
           </div>
 
           {/* Right Actions */}
@@ -126,9 +107,6 @@ export function Header() {
               </a>
               <a href="#dados" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
                 Dados e Estatísticas
-              </a>
-              <a href="#imprensa" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
-                Imprensa
               </a>
             </div>
           </nav>
