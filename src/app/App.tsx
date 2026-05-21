@@ -1,51 +1,20 @@
-﻿import { Header } from './components/Header';
-import { Footer } from './components/Footer';
-import { Satellite, Globe, FileCheck, Database, Network, BarChart3, Activity, MapPin, Radio } from 'lucide-react';
+import { Globe, FileCheck, Satellite, Database, Network, BarChart3, Activity, MapPin, Radio } from 'lucide-react';
+import { useMemo } from 'react';
 import resbra from '../imports/resbra.png';
+import { Header } from './components/Header';
+import { Footer } from './components/Footer';
+import { useI18n } from '../i18n/I18nProvider';
 
-const capabilities = [
-  {
-    icon: FileCheck,
-    title: 'Registro espacial',
-    description: 'Cadastro oficial de satélites, estações terrenas e operadores licenciados no território nacional.'
-  },
-  {
-    icon: Satellite,
-    title: 'Monitoramento orbital',
-    description: 'Acompanhamento em tempo real de trajetórias, manobras e eventos de ativos espaciais brasileiros.'
-  },
-  {
-    icon: Globe,
-    title: 'Licenciamento',
-    description: 'Gestão de autorizações e conformidade regulatória para operações espaciais no Brasil.'
-  },
-  {
-    icon: Database,
-    title: 'Dados geoespaciais',
-    description: 'Repositório centralizado de informações orbitais, telemetria e parâmetros técnicos.'
-  },
-  {
-    icon: Network,
-    title: 'Integração institucional',
-    description: 'Interface com agências governamentais, centros de pesquisa e operadores privados.'
-  },
-  {
-    icon: BarChart3,
-    title: 'Inteligência analítica',
-    description: 'Análises preditivas, detecção de anomalias e suporte à decisão estratégica.'
-  }
-];
-
-const partners = [
-  { name: 'Agência Espacial Brasileira', abbr: 'AEB' },
-  { name: 'Ministério da Ciência e Tecnologia', abbr: 'MCTI' },
-  { name: 'Instituto Nacional de Pesquisas Espaciais', abbr: 'INPE' },
-  { name: 'Observatório Nacional', abbr: 'ON' },
-  { name: 'Comando da Aeronáutica', abbr: 'COMAER' },
-  { name: 'Agência Nacional de Telecomunicações', abbr: 'ANATEL' },
-];
+const capabilityIcons = [FileCheck, Satellite, Globe, Database, Network, BarChart3] as const;
 
 export default function App() {
+  const { t } = useI18n();
+
+  const capabilities = useMemo(
+    () => t.capabilities.items.map((item, index) => ({ ...item, icon: capabilityIcons[index] })),
+    [t],
+  );
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -151,23 +120,22 @@ export default function App() {
           <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 py-10 md:py-12 text-center">
             <div className="space-y-4 md:space-y-5">
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-light text-gray-900 leading-[1.05] tracking-tight max-w-5xl mx-auto">
-                Registro e governança das atividades espaciais brasileiras
+                {t.hero.title}
               </h1>
 
               <p className="text-lg md:text-xl text-gray-800 max-w-3xl mx-auto leading-relaxed text-justify">
-                Plataforma nacional de monitoramento, licenciamento e governança de operações espaciais.
-                Gestão integrada de ativos orbitais brasileiros.
+                {t.hero.descriptionLine1}
+                {` ${t.hero.descriptionLine2}`}
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2 md:pt-3">
                 <button className="px-8 py-4 bg-blue-900 text-white hover:bg-blue-800 transition-all rounded">
-                  Acessar plataforma
+                  {t.hero.primaryCta}
                 </button>
                 <button className="px-8 py-4 bg-white text-gray-900 border border-gray-200 hover:border-gray-300 transition-colors rounded">
-                  Conheça o RESBRA
+                  {t.hero.secondaryCta}
                 </button>
               </div>
-
             </div>
           </div>
         </section>
@@ -178,30 +146,18 @@ export default function App() {
             <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
               <div className="space-y-8">
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 leading-tight tracking-tight">
-                  Regulamentação e governança espacial
+                  {t.institutional.title}
                 </h2>
 
                 <div className="space-y-6 text-gray-600 leading-relaxed text-justify">
-                  <p>
-                    O RESBRA é a infraestrutura nacional para registro, monitoramento e licenciamento
-                    de operações espaciais brasileiras, desenvolvido pela Agência Espacial Brasileira
-                    em conformidade com tratados internacionais e marcos regulatórios nacionais.
-                  </p>
-                  <p>
-                    A plataforma integra dados de múltiplas fontes governamentais, centros de pesquisa
-                    e operadores privados, fornecendo uma visão unificada dos ativos espaciais do Brasil
-                    e suas trajetórias orbitais.
-                  </p>
-                  <p>
-                    Através de tecnologias avançadas de análise geoespacial e inteligência de dados,
-                    o sistema garante a conformidade regulatória, segurança orbital e suporte à tomada
-                    de decisões estratégicas no setor espacial brasileiro.
-                  </p>
+                  {t.institutional.paragraphs.map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
+                  ))}
                 </div>
 
                 <div className="flex items-center gap-4 pt-4">
                   <div className="h-px flex-1 bg-gray-200"></div>
-                  <span className="text-sm text-gray-400">Agência Espacial Brasileira</span>
+                  <span className="text-sm text-gray-400">{t.institutional.signature}</span>
                 </div>
               </div>
 
@@ -209,7 +165,7 @@ export default function App() {
                 <div className="aspect-[4/5] bg-gradient-to-br from-blue-50 to-gray-50 rounded-lg overflow-hidden">
                   <img
                     src="https://images.unsplash.com/photo-1712512162392-d523620fbaa2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080"
-                    alt="Satélite sobre a Terra"
+                    alt={t.institutional.imageAlt}
                     className="w-full h-full object-cover opacity-75 contrast-110 saturate-110"
                   />
                 </div>
@@ -224,7 +180,7 @@ export default function App() {
           <div className="max-w-7xl mx-auto px-6 lg:px-12">
             <div className="max-w-3xl mb-20">
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 leading-tight tracking-tight">
-                Plataforma integrada de gestão espacial
+                {t.capabilities.title}
               </h2>
             </div>
 
@@ -238,13 +194,9 @@ export default function App() {
                     <capability.icon className="w-6 h-6" />
                   </div>
 
-                  <h3 className="text-xl font-medium text-gray-900 mb-3">
-                    {capability.title}
-                  </h3>
+                  <h3 className="text-xl font-medium text-gray-900 mb-3">{capability.title}</h3>
 
-                  <p className="text-gray-600 leading-relaxed">
-                    {capability.description}
-                  </p>
+                  <p className="text-gray-600 leading-relaxed">{capability.description}</p>
                 </div>
               ))}
             </div>
@@ -256,11 +208,9 @@ export default function App() {
           <div className="max-w-7xl mx-auto px-6 lg:px-12">
             <div className="text-center max-w-3xl mx-auto mb-20">
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 leading-tight tracking-tight mb-6">
-                Centro de controle geoespacial
+                {t.dashboard.title}
               </h2>
-              <p className="text-lg text-gray-600 leading-relaxed text-justify">
-                Interface unificada para monitoramento, análise e gestão de operações espaciais brasileiras
-              </p>
+              <p className="text-lg text-gray-600 leading-relaxed text-justify">{t.dashboard.description}</p>
             </div>
 
             <div className="relative">
@@ -274,21 +224,21 @@ export default function App() {
                     <div className="p-6 bg-gray-50 rounded-lg border border-gray-100">
                       <div className="flex items-center gap-3 mb-3">
                         <Activity className="w-5 h-5 text-blue-600" />
-                        <span className="text-sm text-gray-500">Ativos ativos</span>
+                        <span className="text-sm text-gray-500">{t.dashboard.activeAssets}</span>
                       </div>
                       <div className="text-3xl font-light text-gray-900">247</div>
                     </div>
                     <div className="p-6 bg-gray-50 rounded-lg border border-gray-100">
                       <div className="flex items-center gap-3 mb-3">
                         <MapPin className="w-5 h-5 text-blue-600" />
-                        <span className="text-sm text-gray-500">Órbitas</span>
+                        <span className="text-sm text-gray-500">{t.dashboard.orbits}</span>
                       </div>
                       <div className="text-3xl font-light text-gray-900">18</div>
                     </div>
                     <div className="p-6 bg-gray-50 rounded-lg border border-gray-100">
                       <div className="flex items-center gap-3 mb-3">
                         <Radio className="w-5 h-5 text-blue-600" />
-                        <span className="text-sm text-gray-500">Estações</span>
+                        <span className="text-sm text-gray-500">{t.dashboard.stations}</span>
                       </div>
                       <div className="text-3xl font-light text-gray-900">34</div>
                     </div>
@@ -297,13 +247,13 @@ export default function App() {
                   <div className="aspect-[16/9] bg-gradient-to-br from-blue-50 to-gray-50 rounded-lg border border-gray-200 overflow-hidden relative">
                     <img
                       src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080"
-                      alt="Dashboard interface"
+                      alt={t.dashboard.imageAlt}
                       className="w-full h-full object-cover opacity-20"
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="text-center space-y-3">
                         <Globe className="w-16 h-16 text-blue-900/20 mx-auto" />
-                        <p className="text-gray-400 text-sm">Visualização geoespacial integrada</p>
+                        <p className="text-gray-400 text-sm">{t.dashboard.mapCaption}</p>
                       </div>
                     </div>
                   </div>
@@ -321,20 +271,14 @@ export default function App() {
           <div className="max-w-7xl mx-auto px-6 lg:px-12">
             <div className="text-center max-w-3xl mx-auto mb-16">
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 leading-tight tracking-tight mb-6">
-                SINDAE
+                {t.ecosystem.title}
               </h2>
-              <p className="text-lg text-gray-600 leading-relaxed text-justify">
-                Integração com agências governamentais, instituições de pesquisa e operadores do setor espacial brasileiro
-              </p>
+              <p className="text-lg text-gray-600 leading-relaxed text-justify">{t.ecosystem.description}</p>
             </div>
 
             {/* Ecosystem Diagram */}
             <div className="flex items-center justify-center mb-8 md:mb-12">
-              <img
-                src={resbra}
-                alt="Ecossistema RESBRA - Agência Espacial Brasileira"
-                className="max-w-3xl w-full h-auto"
-              />
+              <img src={resbra} alt={t.ecosystem.imageAlt} className="max-w-3xl w-full h-auto" />
             </div>
           </div>
         </section>
@@ -343,4 +287,3 @@ export default function App() {
     </div>
   );
 }
-
